@@ -13,12 +13,13 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #263577 0%, #481879 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
+            padding: 10px;
         }
 
         .page {
@@ -26,6 +27,12 @@
             width: 100%;
             max-width: 800px;
             padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .page {
+                padding: 10px;
+            }
         }
 
         .page.active {
@@ -55,6 +62,12 @@
             opacity: 0.6;
         }
 
+        @media (max-width: 600px) {
+            .floating-heart {
+                font-size: 20px;
+            }
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -68,11 +81,25 @@
             position: relative;
         }
 
+        @media (max-width: 600px) {
+            .question-box {
+                padding: 40px 20px;
+                border-radius: 20px;
+            }
+        }
+
         h1 {
             font-size: 3em;
             color: #d63384;
             margin-bottom: 30px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
         }
 
         .yes-btn {
@@ -83,14 +110,27 @@
             font-size: 1.5em;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(119, 80, 85, 0.4);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
             transition: all 0.3s ease;
             font-weight: bold;
         }
 
+        @media (max-width: 600px) {
+            .yes-btn {
+                padding: 15px 40px;
+                font-size: 1.2em;
+            }
+        }
+
         .yes-btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(134, 29, 43, 0.6);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            .yes-btn:active {
+                transform: translateY(-3px);
+            }
         }
 
         /* Image Upload Page */
@@ -105,16 +145,35 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
+        @media (max-width: 600px) {
+            .upload-box {
+                padding: 40px 20px;
+                border-radius: 20px;
+            }
+        }
+
         .upload-title {
             font-size: 2.5em;
             color: #d63384;
             margin-bottom: 20px;
         }
 
+        @media (max-width: 600px) {
+            .upload-title {
+                font-size: 1.8em;
+            }
+        }
+
         .upload-instruction {
             font-size: 1.2em;
             color: #666;
             margin-bottom: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .upload-instruction {
+                font-size: 1em;
+            }
         }
 
         .file-input-wrapper {
@@ -135,9 +194,22 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
+        @media (max-width: 600px) {
+            .file-input-label {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+        }
+
         .file-input-label:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 600px) {
+            .file-input-label:active {
+                transform: translateY(-2px);
+            }
         }
 
         #imageUpload {
@@ -151,6 +223,13 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             display: none;
+        }
+
+        @media (max-width: 600px) {
+            #preview {
+                max-width: 100%;
+                max-height: 300px;
+            }
         }
 
         .continue-btn {
@@ -167,9 +246,22 @@
             display: none;
         }
 
+        @media (max-width: 600px) {
+            .continue-btn {
+                padding: 12px 35px;
+                font-size: 1.1em;
+            }
+        }
+
         .continue-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            .continue-btn:active {
+                transform: translateY(-3px);
+            }
         }
 
         /* Page 2 - Puzzle */
@@ -184,10 +276,24 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
+        @media (max-width: 600px) {
+            .puzzle-container {
+                padding: 20px 10px;
+                border-radius: 15px;
+            }
+        }
+
         .puzzle-title {
             font-size: 2em;
             color: #d63384;
             margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .puzzle-title {
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
         }
 
         .puzzle-instruction {
@@ -196,29 +302,63 @@
             font-size: 1.1em;
         }
 
+        @media (max-width: 600px) {
+            .puzzle-instruction {
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+        }
+
         #puzzle-board {
             display: grid;
-            grid-template-columns: repeat(4, 100px);
-            grid-template-rows: repeat(4, 100px);
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
             gap: 2px;
             background: #ddd;
             border: 3px solid #d63384;
             margin: 20px auto;
             width: fit-content;
             padding: 2px;
+            touch-action: none;
+        }
+
+        @media (max-width: 600px) {
+            #puzzle-board {
+                grid-template-columns: repeat(3, 90px);
+                grid-template-rows: repeat(3, 90px);
+                gap: 1px;
+                border: 2px solid #d63384;
+                padding: 1px;
+            }
         }
 
         .puzzle-piece {
             width: 100px;
             height: 100px;
             cursor: move;
-            background-size: 400px 400px;
+            background-size: 300px 300px;
             border: 1px solid rgba(255,255,255,0.3);
             transition: opacity 0.2s;
+            touch-action: none;
+        }
+
+        @media (max-width: 600px) {
+            .puzzle-piece {
+                width: 90px;
+                height: 90px;
+                background-size: 270px 270px;
+                cursor: pointer;
+            }
         }
 
         .puzzle-piece:hover {
             opacity: 0.8;
+        }
+
+        .puzzle-piece.selected {
+            opacity: 0.7;
+            border: 3px solid #f5576c;
+            box-shadow: 0 0 10px rgba(245, 87, 108, 0.8);
         }
 
         .puzzle-piece.correct {
@@ -238,10 +378,24 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
+        @media (max-width: 600px) {
+            .celebration-box {
+                padding: 40px 20px;
+                border-radius: 20px;
+            }
+        }
+
         .celebration-title {
             font-size: 2.5em;
             color: #d63384;
             margin-bottom: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .celebration-title {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
         }
 
         .celebration-message {
@@ -251,8 +405,21 @@
             line-height: 1.6;
         }
 
+        @media (max-width: 600px) {
+            .celebration-message {
+                font-size: 1.2em;
+                margin-bottom: 20px;
+            }
+        }
+
         .gif-container {
             margin: 30px 0;
+        }
+
+        @media (max-width: 600px) {
+            .gif-container {
+                margin: 20px 0;
+            }
         }
 
         .gif-container img {
@@ -260,6 +427,13 @@
             width: 100%;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 600px) {
+            .gif-container img {
+                max-width: 100%;
+                border-radius: 15px;
+            }
         }
 
         .confetti {
@@ -283,9 +457,9 @@
     <!-- Upload Page -->
     <div id="upload-page" class="page active">
         <div class="upload-box">
-            <h2 class="upload-title">💕 Upload Your Favourite Picture of Us 💕</h2>
+            <h2 class="upload-title">💕 Upload Your Picture 💕</h2>
             <p class="upload-instruction">
-                Choose a photo of us together to create something special!
+                Choose a photo of us two together to create a special puzzle!
             </p>
             <div class="file-input-wrapper">
                 <label for="imageUpload" class="file-input-label">
@@ -313,7 +487,7 @@
         <div class="question-box">
             <h1>Will You Be My Valentine?</h1>
             <p style="font-size: 1.3em; color: #666; margin-bottom: 40px;">
-                I have something for you to solve first...
+                I have something special to show you...
             </p>
             <button class="yes-btn" onclick="goToPage2()">Yes! 💕</button>
         </div>
@@ -340,7 +514,7 @@
                 <strong style="font-size: 1.2em; color: #d63384;">Forever and Ever!</strong>
             </p>
             <div class="gif-container">
-                <img src="https://media.tenor.com/rwAWhystcgQAAAAi/happy-valentines-day-love-happy-valentines-day-my-love.gif" alt="Yeah kid celebration">
+                <img src="https://media.tenor.com/rwAWhystcgQAAAAj/happy-valentines-day-love-happy-valentines-day-my-love.gif" alt="Yeah kid celebration">
             </div>
             <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
                 ❤️ I love you ❤️
@@ -388,6 +562,10 @@
         // Puzzle logic
         let pieces = [];
         let draggedPiece = null;
+        let selectedPiece = null;
+        const isMobile = window.innerWidth <= 600;
+        const pieceSize = isMobile ? 90 : 100;
+        const totalSize = pieceSize * 3;
 
         function initPuzzle() {
             const board = document.getElementById('puzzle-board');
@@ -395,8 +573,8 @@
             // Use uploaded image
             const coupleImage = uploadedImageData;
             
-            // Create 16 pieces (4x4 grid)
-            for (let i = 0; i < 16; i++) {
+            // Create 9 pieces (3x3 grid)
+            for (let i = 0; i < 9; i++) {
                 pieces.push(i);
             }
             
@@ -409,18 +587,23 @@
                 piece.className = 'puzzle-piece';
                 piece.dataset.index = pieceIndex;
                 piece.dataset.position = position;
-                piece.draggable = true;
                 
-                const row = Math.floor(pieceIndex / 4);
-                const col = pieceIndex % 4;
+                const row = Math.floor(pieceIndex / 3);
+                const col = pieceIndex % 3;
                 
                 piece.style.backgroundImage = `url('${coupleImage}')`;
-                piece.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+                piece.style.backgroundPosition = `-${col * pieceSize}px -${row * pieceSize}px`;
                 
+                // Desktop drag and drop
+                piece.draggable = true;
                 piece.addEventListener('dragstart', handleDragStart);
                 piece.addEventListener('dragover', handleDragOver);
                 piece.addEventListener('drop', handleDrop);
                 piece.addEventListener('dragend', handleDragEnd);
+                
+                // Mobile touch/click support
+                piece.addEventListener('click', handleClick);
+                piece.addEventListener('touchstart', handleTouchStart);
                 
                 board.appendChild(piece);
             });
@@ -440,17 +623,7 @@
             e.preventDefault();
             
             if (draggedPiece !== this) {
-                // Swap pieces
-                const tempBg = this.style.backgroundPosition;
-                const tempIndex = this.dataset.index;
-                
-                this.style.backgroundPosition = draggedPiece.style.backgroundPosition;
-                this.dataset.index = draggedPiece.dataset.index;
-                
-                draggedPiece.style.backgroundPosition = tempBg;
-                draggedPiece.dataset.index = tempIndex;
-                
-                checkCompletion();
+                swapPieces(draggedPiece, this);
             }
             
             return false;
@@ -458,6 +631,47 @@
 
         function handleDragEnd(e) {
             this.style.opacity = '1';
+        }
+
+        // Mobile touch/click handlers
+        function handleClick(e) {
+            e.preventDefault();
+            
+            if (this.classList.contains('correct')) return;
+            
+            if (!selectedPiece) {
+                // First piece selected
+                selectedPiece = this;
+                this.classList.add('selected');
+            } else if (selectedPiece === this) {
+                // Deselect if clicking the same piece
+                this.classList.remove('selected');
+                selectedPiece = null;
+            } else {
+                // Second piece selected - swap them
+                swapPieces(selectedPiece, this);
+                selectedPiece.classList.remove('selected');
+                selectedPiece = null;
+            }
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            handleClick.call(this, e);
+        }
+
+        function swapPieces(piece1, piece2) {
+            // Swap pieces
+            const tempBg = piece2.style.backgroundPosition;
+            const tempIndex = piece2.dataset.index;
+            
+            piece2.style.backgroundPosition = piece1.style.backgroundPosition;
+            piece2.dataset.index = piece1.dataset.index;
+            
+            piece1.style.backgroundPosition = tempBg;
+            piece1.dataset.index = tempIndex;
+            
+            checkCompletion();
         }
 
         function checkCompletion() {
