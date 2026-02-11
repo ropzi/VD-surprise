@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #263577 0%, #481879 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .page {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Page 1 - Question */
+        #page1 {
+            text-align: center;
+        }
+
+        .heart-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .question-box {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #d63384;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(119, 80, 85, 0.4);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .yes-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(134, 29, 43, 0.6);
+        }
+
+        /* Image Upload Page */
+        #upload-page {
+            text-align: center;
+        }
+
+        .upload-box {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .upload-title {
+            font-size: 2.5em;
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        .upload-instruction {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .file-input-label {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .file-input-label:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        #imageUpload {
+            display: none;
+        }
+
+        #preview {
+            max-width: 400px;
+            max-height: 400px;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            display: none;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+        }
+
+        /* Page 2 - Puzzle */
+        #page2 {
+            text-align: center;
+        }
+
+        .puzzle-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .puzzle-title {
+            font-size: 2em;
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        .puzzle-instruction {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        #puzzle-board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(4, 100px);
+            gap: 2px;
+            background: #ddd;
+            border: 3px solid #d63384;
+            margin: 20px auto;
+            width: fit-content;
+            padding: 2px;
+        }
+
+        .puzzle-piece {
+            width: 100px;
+            height: 100px;
+            cursor: move;
+            background-size: 400px 400px;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: opacity 0.2s;
+        }
+
+        .puzzle-piece:hover {
+            opacity: 0.8;
+        }
+
+        .puzzle-piece.correct {
+            cursor: default;
+            border: 1px solid #4caf50;
+        }
+
+        /* Page 3 - Celebration */
+        #page3 {
+            text-align: center;
+        }
+
+        .celebration-box {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .celebration-title {
+            font-size: 2.5em;
+            color: #d63384;
+            margin-bottom: 30px;
+        }
+
+        .celebration-message {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .gif-container {
+            margin: 30px 0;
+        }
+
+        .gif-container img {
+            max-width: 400px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            position: absolute;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Upload Page -->
+    <div id="upload-page" class="page active">
+        <div class="upload-box">
+            <h2 class="upload-title">💕 Upload Your Favourite Picture of Us 💕</h2>
+            <p class="upload-instruction">
+                Choose a photo of us together to create something special!
+            </p>
+            <div class="file-input-wrapper">
+                <label for="imageUpload" class="file-input-label">
+                    📸 Choose Photo
+                </label>
+                <input type="file" id="imageUpload" accept="image/*">
+            </div>
+            <div>
+                <img id="preview" alt="Preview">
+            </div>
+            <button class="continue-btn" id="continueBtn" onclick="goToPage1()">
+                Continue to Surprise! 💖
+            </button>
+        </div>
+    </div>
+
+    <!-- Page 1: The Question -->
+    <div id="page1" class="page">
+        <div class="heart-container">
+            <span class="floating-heart" style="left: 10%; animation-delay: 0s;">💕</span>
+            <span class="floating-heart" style="right: 10%; animation-delay: 0.5s;">❤️</span>
+            <span class="floating-heart" style="left: 30%; top: 20%; animation-delay: 1s;">💖</span>
+            <span class="floating-heart" style="right: 30%; top: 20%; animation-delay: 1.5s;">💗</span>
+        </div>
+        <div class="question-box">
+            <h1>Will You Be My Valentine?</h1>
+            <p style="font-size: 1.3em; color: #666; margin-bottom: 40px;">
+                I have something for you to solve first...
+            </p>
+            <button class="yes-btn" onclick="goToPage2()">Yes! 💕</button>
+        </div>
+    </div>
+
+    <!-- Page 2: The Puzzle -->
+    <div id="page2" class="page">
+        <div class="puzzle-container">
+            <h2 class="puzzle-title">Complete Our Picture!</h2>
+            <p class="puzzle-instruction">Drag and drop the pieces to complete the puzzle 🧩</p>
+            <div id="puzzle-board"></div>
+            <div id="completion-message" style="display: none; margin-top: 20px;">
+                <p style="font-size: 1.5em; color: #4caf50; font-weight: bold;">🎉 Perfect! 🎉</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: Celebration -->
+    <div id="page3" class="page">
+        <div class="celebration-box">
+            <h2 class="celebration-title">🎉 Congratulations! 🎉</h2>
+            <p class="celebration-message">
+                You're my Valentine<br>
+                <strong style="font-size: 1.2em; color: #d63384;">Forever and Ever!</strong>
+            </p>
+            <div class="gif-container">
+                <img src="https://media.tenor.com/rwAWhystcgQAAAAi/happy-valentines-day-love-happy-valentines-day-my-love.gif" alt="Yeah kid celebration">
+            </div>
+            <p style="margin-top: 30px; font-size: 1.2em; color: #666;">
+                ❤️ I love you ❤️
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let uploadedImageData = null;
+
+        // Image upload handling
+        document.getElementById('imageUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    uploadedImageData = event.target.result;
+                    const preview = document.getElementById('preview');
+                    preview.src = uploadedImageData;
+                    preview.style.display = 'block';
+                    document.getElementById('continueBtn').style.display = 'inline-block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Page navigation
+        function goToPage1() {
+            document.getElementById('upload-page').classList.remove('active');
+            document.getElementById('page1').classList.add('active');
+        }
+
+        function goToPage2() {
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
+            initPuzzle();
+        }
+
+        function goToPage3() {
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('page3').classList.add('active');
+            createConfetti();
+        }
+
+        // Puzzle logic
+        let pieces = [];
+        let draggedPiece = null;
+
+        function initPuzzle() {
+            const board = document.getElementById('puzzle-board');
+            
+            // Use uploaded image
+            const coupleImage = uploadedImageData;
+            
+            // Create 16 pieces (4x4 grid)
+            for (let i = 0; i < 16; i++) {
+                pieces.push(i);
+            }
+            
+            // Shuffle pieces
+            pieces = pieces.sort(() => Math.random() - 0.5);
+            
+            // Create puzzle pieces
+            pieces.forEach((pieceIndex, position) => {
+                const piece = document.createElement('div');
+                piece.className = 'puzzle-piece';
+                piece.dataset.index = pieceIndex;
+                piece.dataset.position = position;
+                piece.draggable = true;
+                
+                const row = Math.floor(pieceIndex / 4);
+                const col = pieceIndex % 4;
+                
+                piece.style.backgroundImage = `url('${coupleImage}')`;
+                piece.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+                
+                piece.addEventListener('dragstart', handleDragStart);
+                piece.addEventListener('dragover', handleDragOver);
+                piece.addEventListener('drop', handleDrop);
+                piece.addEventListener('dragend', handleDragEnd);
+                
+                board.appendChild(piece);
+            });
+        }
+
+        function handleDragStart(e) {
+            draggedPiece = this;
+            this.style.opacity = '0.5';
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            return false;
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            
+            if (draggedPiece !== this) {
+                // Swap pieces
+                const tempBg = this.style.backgroundPosition;
+                const tempIndex = this.dataset.index;
+                
+                this.style.backgroundPosition = draggedPiece.style.backgroundPosition;
+                this.dataset.index = draggedPiece.dataset.index;
+                
+                draggedPiece.style.backgroundPosition = tempBg;
+                draggedPiece.dataset.index = tempIndex;
+                
+                checkCompletion();
+            }
+            
+            return false;
+        }
+
+        function handleDragEnd(e) {
+            this.style.opacity = '1';
+        }
+
+        function checkCompletion() {
+            const pieces = document.querySelectorAll('.puzzle-piece');
+            let allCorrect = true;
+            
+            pieces.forEach((piece, position) => {
+                if (parseInt(piece.dataset.index) === position) {
+                    piece.classList.add('correct');
+                } else {
+                    piece.classList.remove('correct');
+                    allCorrect = false;
+                }
+            });
+            
+            if (allCorrect) {
+                setTimeout(() => {
+                    document.getElementById('completion-message').style.display = 'block';
+                    setTimeout(goToPage3, 2000);
+                }, 300);
+            }
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = ['#ff6b9d', '#4a90e2', '#ffd700', '#ff1744'][Math.floor(Math.random() * 4)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
